@@ -1,0 +1,38 @@
+﻿@model LoginVM
+<section class="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <div class="login-content border p-4">
+                    <h4 class="">Hello! Sign into your account</h4>
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="UsernameOrEmail" class="">Email Address/Username</label>
+                            <input asp-for="UsernameOrEmail">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="">Password</label>
+                            <input asp-for="Password">
+                        </div>
+                        <div class="form-group form-checkbox text-center mb-1">
+                            <input asp-for="IsRemember" class=""> Remember Me
+                            | <a href="#" class="yellow">Forgot password?</a>
+                        </div>
+                        <div class="form-group form-checkbox text-center mb-1">
+                        <button type="submit" class="nir-btn mb-2">sign in</button>
+                        </div>
+                    </form>
+                    <div class="login-social mb-2 text-center">
+                        <p class=""><strong>- or -</strong></p>
+                        <a href="#" class="btn-facebook"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a>
+                        <a href="#" class="btn-twitter"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a>
+                    </div>
+                    <div class="form-btn text-center">
+                        <a href="#" class="nir-btn mb-2">LOGIN</a>
+                        <p class="">Need an Account? Create your Yatriiworld account</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
