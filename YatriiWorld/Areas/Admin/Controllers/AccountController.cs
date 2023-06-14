@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using YatriiWorld.Models;
 using YatriiWorld.Utilities.Extensions;
@@ -12,11 +13,13 @@ namespace YatriiWorld.Areas.Admin.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         public IActionResult Register()
@@ -33,15 +36,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
                 ModelState.AddModelError("Email", "Email formati dogru deyil");
                 return View();
             }
-            AppUser user = new AppUser
-            {
-                Name = newuser.Name.Capitalize(),
-                Surname = newuser.Surname.Capitalize(),
-                Email = newuser.Email,
-                UserName = newuser.Name,
-                Gender = newuser.Gender,
-
-            };
+            AppUser user = _mapper.Map<AppUser>(newuser);
             IdentityResult result = await _userManager.CreateAsync(user, newuser.Password);
 
             if (!result.Succeeded)

@@ -12,5 +12,6 @@ namespace YatriiWorld.DAL
         }
 
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Slide> Slides { get; set; }
     }
 }
