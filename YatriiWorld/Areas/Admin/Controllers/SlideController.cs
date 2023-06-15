@@ -44,9 +44,9 @@ namespace YatriiWorld.Areas.Admin.Controllers
                 ModelState.AddModelError("Photo", "File type is not correct!");
                 return View();
             }
-            if (!slideVM.Photo.CheckFileSize(500))
+            if (!slideVM.Photo.CheckFileSize(2048))
             {
-                ModelState.AddModelError("Photo", "File size must be less than 500kb!");
+                ModelState.AddModelError("Photo", "File size must be less than 2Mb!");
                 return View();
             }
 
@@ -56,5 +56,58 @@ namespace YatriiWorld.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null) return BadRequest();
+            Slide slide= await _context.Slides.FirstOrDefaultAsync(s=>s.Id == id);
+            if (slide == null) return NotFound();
+            UpdateSlideVM slideVM = _mapper.Map<UpdateSlideVM>(slide);
+            return View(slideVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(int? id, UpdateSlideVM slideVM)
+        {
+            if (id == null) return BadRequest();
+            Slide slide = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
+            if (slide == null) return NotFound();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if(slideVM.Photo!=null)
+            {
+                if (!slideVM.Photo.CheckFileType("image/"))
+                {
+                    ModelState.AddModelError("Photo", "File type is not correct!");
+                    return View();
+                }
+                if (!slideVM.Photo.CheckFileSize(2048))
+                {
+                    ModelState.AddModelError("Photo", "File size must be less than 2Mb!");
+                    return View();
+                }
+                slideVM.Image.DeleteFile(_env.WebRootPath, "assets/images/slider/");
+                slideVM.Image =await slideVM.Photo.CreateFileAsync(_env.WebRootPath, "assets/images/slider/");
+            }
+            slide = _mapper.Map(slideVM,slide);
+            _context.Slides.Update(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest();
+            Slide slide = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
+            if (slide == null) return NotFound();
+
+            slide.Image.DeleteFile(_env.WebRootPath, "assets/images/slider/");
+            _context.Slides.Remove(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
     }
 }

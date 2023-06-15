@@ -12,6 +12,8 @@ namespace YatriiWorld.Services
             CreateMap<RegisterVM, AppUser>();
             CreateMap<Slide, CreateSlideVM>();
             CreateMap<CreateSlideVM, Slide>();
+            CreateMap<Slide, UpdateSlideVM>();
+            CreateMap<UpdateSlideVM, Slide>();
         }
     }
 }
