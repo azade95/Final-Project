@@ -5900,14 +5900,15 @@ section.blog .grid {
     display: inline-block; }
 
 .author-news {
-  position: relative;
-  overflow: hidden;
-  background: url(../images/bg/bg7.jpg) no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  display: inline-block;
-  width: 100%; }
+    position: relative;
+    overflow: hidden;
+    background: url(https://htmldesigntemplates.com/html/yatriiworld/images/bg/bg7.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: inline-block;
+    width: 100%;
+}
   .author-news .author-news-content {
     position: relative;
     z-index: 1; }

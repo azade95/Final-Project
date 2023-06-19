@@ -1,38 +1,81 @@
-﻿@model LoginVM
-<section class="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-xs-12">
-                <div class="login-content border p-4">
-                    <h4 class="">Hello! Sign into your account</h4>
-                    <form method="post">
-                        <div class="form-group">
-                            <label asp-for="UsernameOrEmail" class="">Email Address/Username</label>
-                            <input asp-for="UsernameOrEmail">
+﻿@{
+    Layout = null;
+}
+@model LoginVM
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Majestic Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/admin/vendors/base/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/admin/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/admin/images/favicon.png" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="brand-logo">
+                                <img src="~/admin/images/logo.svg" alt="logo">
+                            </div>
+                            <h4>Hello! let's get started</h4>
+                            <h6 class="font-weight-light">Sign in to continue.</h6>
+                            <form class="pt-3" method="post">
+                                <div class="form-group">
+                                    <input asp-for="UsernameOrEmail" class="form-control form-control-lg" placeholder="Username Or Email">
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Password" class="form-control form-control-lg" placeholder="Password">
+                                </div>
+                                <div class="text-danger" asp-validation-summary="ModelOnly">
+                                </div>
+                                <div class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            <input asp-for="IsRemember" class="form-check-input">
+                                            Keep me signed in
+                                        </label>
+                                    </div>
+                                    <a href="#" class="auth-link text-black">Forgot password?</a>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                                </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                    Don't have an account? <a asp-action="register" asp-controller="account" class="text-primary">Create</a>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="">Password</label>
-                            <input asp-for="Password">
-                        </div>
-                        <div class="form-group form-checkbox text-center mb-1">
-                            <input asp-for="IsRemember" class=""> Remember Me
-                            | <a href="#" class="yellow">Forgot password?</a>
-                        </div>
-                        <div class="form-group form-checkbox text-center mb-1">
-                        <button type="submit" class="nir-btn mb-2">sign in</button>
-                        </div>
-                    </form>
-                    <div class="login-social mb-2 text-center">
-                        <p class=""><strong>- or -</strong></p>
-                        <a href="#" class="btn-facebook"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a>
-                        <a href="#" class="btn-twitter"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a>
-                    </div>
-                    <div class="form-btn text-center">
-                        <a href="#" class="nir-btn mb-2">LOGIN</a>
-                        <p class="">Need an Account? Create your Yatriiworld account</p>
                     </div>
                 </div>
             </div>
+            <!-- content-wrapper ends -->
         </div>
+        <!-- page-body-wrapper ends -->
     </div>
-</section>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/admin/vendors/base/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="~/admin/js/off-canvas.js"></script>
+    <script src="~/admin/js/hoverable-collapse.js"></script>
+    <script src="~/admin/js/template.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using YatriiWorld.DAL;
 using YatriiWorld.Models;
+using YatriiWorld.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.Lockout.AllowedForNewUsers = true;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddScoped<LayoutService>();
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();

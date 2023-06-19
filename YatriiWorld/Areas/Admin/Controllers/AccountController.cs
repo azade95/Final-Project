@@ -79,14 +79,14 @@ namespace YatriiWorld.Areas.Admin.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
 
         }
 
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

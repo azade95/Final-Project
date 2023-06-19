@@ -11,5 +11,6 @@ namespace YatriiWorld.DAL
             
         }
 
+        public DbSet<Setting> Settings { get; set; }
     }
 }
