@@ -30,7 +30,7 @@ namespace YatriiWorld.Controllers
                 review.TourId =(int) id;
             }
             _context.Reviews.Add(review);
-            _context.Ratings.Add(review.Rating);
+            //_context.Ratings.Add(review.Rating);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index","Home");
         }

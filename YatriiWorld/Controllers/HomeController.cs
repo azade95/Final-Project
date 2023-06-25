@@ -32,5 +32,11 @@ namespace YatriiWorld.Controllers
 
         }
 
+        public async Task<IActionResult> About()
+        {
+            List<Employee> employees = await _context.Employees.Include(e=>e.Position).ToListAsync();
+            return View(employees);
+        }
+
     }
 }

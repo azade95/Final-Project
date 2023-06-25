@@ -17,6 +17,8 @@ namespace YatriiWorld.DAL
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<BookedTour> BookedTours { get; set;}
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
     }
 }

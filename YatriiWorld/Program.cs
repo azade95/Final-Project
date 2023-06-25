@@ -57,7 +57,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-//app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:Secretkey"];
 
 app.MapControllerRoute("Areas", "{area:exists}/{controller=home}/{action=index}/{id?}");

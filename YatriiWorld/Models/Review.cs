@@ -8,7 +8,7 @@
         public AppUser User { get; set; }
         public int TourId { get; set; }
         public Tour Tour { get; set; } 
-        public Rating Rating { get; set; }
+        
         
 
     }
