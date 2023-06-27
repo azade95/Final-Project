@@ -16,6 +16,8 @@ namespace YatriiWorld.Services
             CreateMap<UpdateSlideVM, Slide>();
             CreateMap<Tour,CreateTourVM>();
             CreateMap<CreateTourVM,Tour>();
+            CreateMap<Tour,UpdateTourVM>();
+            CreateMap<UpdateTourVM,Tour>();
         }
     }
 }

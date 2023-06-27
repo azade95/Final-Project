@@ -12,6 +12,11 @@ namespace YatriiWorld.Controllers
             return View();
         }
 
-       
+        public IActionResult ErrorPage(string errorMessage="Xeta bash verdi")
+        {
+            return View(model: errorMessage);
+
+        }
+
     }
 }

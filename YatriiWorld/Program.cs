@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using YatriiWorld.DAL;
+using YatriiWorld.Middlewares;
 using YatriiWorld.Models;
 using YatriiWorld.Services;
 
@@ -44,6 +45,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.MapControllerRoute("Areas", "{area:exists}/{controller=home}/{action=index}/{id?}");
 app.MapControllerRoute(

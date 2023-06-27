@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YatriiWorld.DAL;
 using YatriiWorld.Models;
+using YatriiWorld.Utilities.Exceptions;
 using YatriiWorld.Utilities.Extensions;
 using YatriiWorld.ViewModels;
 
@@ -59,18 +60,18 @@ namespace YatriiWorld.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id == null|| id<1) throw new WrongRequestException("Id dogru deyil");
             Slide slide= await _context.Slides.FirstOrDefaultAsync(s=>s.Id == id);
-            if (slide == null) return NotFound();
+            if (slide == null) throw new NotFoundException("Slide is not found!");
             UpdateSlideVM slideVM = _mapper.Map<UpdateSlideVM>(slide);
             return View(slideVM);
         }
         [HttpPost]
         public async Task<IActionResult> Update(int? id, UpdateSlideVM slideVM)
         {
-            if (id == null) return BadRequest();
+            if (id == null || id < 1) throw new WrongRequestException("Id dogru deyil");
             Slide slide = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
-            if (slide == null) return NotFound();
+            if (slide == null) throw new NotFoundException(" Slide is not found!");
             if (!ModelState.IsValid)
             {
                 return View();
@@ -99,9 +100,9 @@ namespace YatriiWorld.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id == null || id < 1) throw new WrongRequestException("Id dogru deyil");
             Slide slide = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
-            if (slide == null) return NotFound();
+            if (slide == null) throw new NotFoundException(" Slide is not found!");
 
             slide.Image.DeleteFile(_env.WebRootPath, "assets/images/slider/");
             _context.Slides.Remove(slide);
