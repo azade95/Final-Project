@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using YatriiWorld.DAL;
 using YatriiWorld.Models;
 using YatriiWorld.Utilities.Exceptions;
@@ -12,6 +14,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AutoValidateAntiforgeryToken]
+  
     public class TourController : Controller
     {
         private readonly AppDbContext _context;
@@ -28,7 +31,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Tour> tours = await _context.Tours.ToListAsync();
+            List<Tour> tours = await _context.Tours.Include(t=>t.User).ToListAsync();
             return View(tours);
         }
 

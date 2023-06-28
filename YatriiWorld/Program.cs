@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using YatriiWorld.DAL;
+using YatriiWorld.Interfaces;
 using YatriiWorld.Middlewares;
 using YatriiWorld.Models;
 using YatriiWorld.Services;
@@ -28,9 +29,12 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.AllowedForNewUsers = true;
+
+    options.SignIn.RequireConfirmedEmail = true;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<LayoutService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();

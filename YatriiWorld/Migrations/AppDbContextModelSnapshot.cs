@@ -232,6 +232,29 @@ namespace YatriiWorld.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("YatriiWorld.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<double>("Point")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("YatriiWorld.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -325,6 +348,9 @@ namespace YatriiWorld.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MaxPeople")
+                        .HasColumnType("int");
+
                     b.Property<int>("Night")
                         .HasColumnType("int");
 
@@ -404,6 +430,15 @@ namespace YatriiWorld.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("YatriiWorld.Models.Rating", b =>
+                {
+                    b.HasOne("YatriiWorld.Models.AppUser", "User")
+                        .WithOne("Rating")
+                        .HasForeignKey("YatriiWorld.Models.Rating", "UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("YatriiWorld.Models.Review", b =>
                 {
                     b.HasOne("YatriiWorld.Models.Tour", "Tour")
@@ -413,7 +448,7 @@ namespace YatriiWorld.Migrations
                         .IsRequired();
 
                     b.HasOne("YatriiWorld.Models.AppUser", "User")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Tour");
@@ -428,6 +463,13 @@ namespace YatriiWorld.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("YatriiWorld.Models.AppUser", b =>
+                {
+                    b.Navigation("Rating");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("YatriiWorld.Models.Tour", b =>

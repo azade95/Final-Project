@@ -211,7 +211,7 @@
                             else
                             {
                                 <a asp-action="register" asp-controller="account" asp-area="admin" class="mr-2"><i class="icon-user mr-1"></i> Register</a>
-                                <a asp-action="login" asp-controller="account" asp-area="admin"><i class="icon-login mr-1"></i> Login</a>
+                                <a asp-action="login" asp-controller="account" asp-area="admin" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="icon-login mr-1"></i> Login</a>
                             }
                         </div>
 
