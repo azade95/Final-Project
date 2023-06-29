@@ -43,7 +43,13 @@ namespace YatriiWorld.Areas.Admin.Controllers
                 ModelState.AddModelError("Email", "Email formati dogru deyil");
                 return View();
             }
-            AppUser user = _mapper.Map<AppUser>(newuser);
+            //AppUser user = _mapper.Map<AppUser>(newuser);
+            AppUser user= new AppUser();
+            user.Email = newuser.Email;
+            user.Name = newuser.Name;
+            user.Surname = newuser.Surname;
+            user.UserName = newuser.Username;
+            user.Gender= newuser.Gender;
             IdentityResult result = await _userManager.CreateAsync(user, newuser.Password);
 
             if (!result.Succeeded)
@@ -55,7 +61,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
                 return View();
             }
             await _userManager.AddToRoleAsync(user, UserRole.Member.ToString());
-            var token = _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, Email = user.Email }, Request.Scheme);
             _emailService.SendEmail(user.Email, "Email Confirmation", confirmationLink);
             // await _signInManager.SignInAsync(user, false);

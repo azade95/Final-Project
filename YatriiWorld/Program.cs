@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using YatriiWorld.DAL;
 using YatriiWorld.Interfaces;
 using YatriiWorld.Middlewares;
@@ -32,9 +33,10 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
     options.SignIn.RequireConfirmedEmail = true;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 builder.Services.AddScoped<LayoutService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -50,6 +52,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:Secretkey"];
 
 app.MapControllerRoute("Areas", "{area:exists}/{controller=home}/{action=index}/{id?}");
 app.MapControllerRoute(
