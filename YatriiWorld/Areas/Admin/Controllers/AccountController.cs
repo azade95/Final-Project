@@ -144,5 +144,39 @@ namespace YatriiWorld.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM forgotPasswordVM)
+        {
+            if (!ModelState.IsValid) return View(forgotPasswordVM);
+            AppUser user= await _userManager.FindByEmailAsync(forgotPasswordVM.Email);
+            if (user == null) throw new NotFoundException("User is not found!");
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string link = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token },HttpContext.Request.Scheme);
+            _emailService.SendEmail(user.Email, "Reset password", link);
+            return Json(link);
+        }
+
+        public async Task<IActionResult> ResetPassword(string userId, string token)
+        {
+            if(string.IsNullOrWhiteSpace(userId)|| string.IsNullOrWhiteSpace(token)) throw new WrongRequestException("token is null");
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new NotFoundException("User is not found!");
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM,string userId, string token)
+        {
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) throw new WrongRequestException("token is null");
+            if (!ModelState.IsValid) return View(resetPasswordVM);
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new NotFoundException("User is not found!");
+            var identityUser = await _userManager.ResetPasswordAsync(user, token, resetPasswordVM.ConfirmPassword);
+            return RedirectToAction(nameof(Login));
+        }
     }
 }
