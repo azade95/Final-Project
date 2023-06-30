@@ -10,5 +10,6 @@ namespace YatriiWorld.Models
         public bool IsReminded { get; set; }
         public List<Review> Reviews { get; set; }
         public Rating Rating { get; set; }
+        public BookedTour BookedTour { get; set; }
     }
 }
