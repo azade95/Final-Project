@@ -1,0 +1,130 @@
+﻿
+@model UserVM 
+<!-- BreadCrumb Starts -->
+<section class="breadcrumb-main pb-2" style="background-image: url(images/bg/bg8.jpg);">
+    <div class="dot-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+<!-- Dashboard -->
+<div id="dashboard" class="pt-10 pb-10">
+    <div class="container">
+        <div class="dashboard-main">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard-sidebar">
+                        <div class="profile-sec">
+                            <div class="author-news mb-3">
+                                <div class="author-news-content text-center p-3">
+                                    @if(Model.Image==null)
+                                    {<form asp-action="profile" asp-controller="user" method="post">
+                                        <div class="edit-profile-photo">
+                                                <div class="author-thumb mt-0">
+                                                    <img src="~/assets/images/user/@Model.Image" alt="author">
+                                                </div>
+                                            <div class="change-photo-btn">
+                                                <div class="photoUpload">
+                                                    <input asp-for="Photo" class="upload" />
+                                                    <button type="submit"><i class="fa fa-upload"></i> Upload Photo</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    }
+                                    else{
+                                     
+                                        <div class="edit-profile-photo">
+                                            <img src="~/assets/images/user/@Model.Image" alt="">
+                                            <div class="change-photo-btn">
+                                                <div class="photoUpload">
+                                                    <input asp-for="Photo" class="upload" />
+                                                    <button type="submit"><i class="fa fa-upload"></i> Upload Photo</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                        
+
+                                    <div class="author-content pt-2 p-0">
+                                        <h3 class="mb-1 white"><a href="#" class="white">@Model.Name @Model.Surname"</a></h3>
+                                        
+                                        <p class="detail"><i class="fa fa-phone"></i></p>
+                                        <div class="header-social mt-2">
+                                            <ul>
+                                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dot-overlay"></div>
+                            </div>
+                        </div>
+                        <!-- Responsive Navigation Trigger -->
+                        <div class="dashboard-nav">
+                            <div class="dashboard-nav-inner">
+                                <ul>
+                                    <li><a asp-action="history" asp-controller="user"><i class="fa fa-list-ul"></i>Booking History</a></li>
+                                    <li><a asp-action="logout" asp-controller="account" asp-area="admin"><i class="sl sl-icon-power"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard-content">
+                        <div class="dashboard-form mb-4">
+                            <div class="row">
+
+                                <!-- Profile -->
+                                <div class="col-lg-6 col-md-6 col-xs-12 padding-right-30">
+                                    <div class="dashboard-list">
+                                        <h4 class="gray">Profile Details</h4>
+                                        <div class="dashboard-list-static">
+
+                                            <!-- Avatar -->
+                                           
+
+                                            <!-- Details -->
+                                            <div class="my-profile">
+                                                <div class="form-group">
+                                                    <label class="text-dark">Your Name </label>
+                                                    <input value="@Model.Name @Model.Surname" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="text-dark">Phone Number *</label>
+                                                    <input value="@Model.Phone" type="text">
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="text-dark">Email Address *</label>
+                                                    <input value="@Model.Email" type="text">
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="form-btn">
+                                                <a href="#" class="nir-btn">SAVE CHANGE</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content / End -->
+    </div>
+</div>
+<!-- Dashboard / End -->
+

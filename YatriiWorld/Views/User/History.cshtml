@@ -1,0 +1,77 @@
+﻿@model UserModel
+<!-- BreadCrumb Starts -->
+<section class="breadcrumb-main pb-2" style="background-image: url(images/bg/bg8.jpg);">
+    <div class="dot-overlay"></div>
+</section>
+<!-- BreadCrumb Ends -->
+<!-- Dashboard -->
+<div id="dashboard" class="pt-10 pb-10">
+    <div class="container">
+        <div class="dashboard-main">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard-sidebar">
+                        <div class="profile-sec">
+                            <div class="author-news mb-3">
+                                <div class="author-news-content text-center p-3">
+                                    <div class="author-thumb mt-0">
+                                        <img src="~/assets/images/user/@Model.User.Image" alt="author">
+                                    </div>
+                                    <div class="author-content pt-2 p-0">
+                                        <h3 class="mb-1 white"><a href="#" class="white">@Model.User.Name @Model.User.Surname</a></h3>
+                                        <p class="detail"><i class="fa fa-phone"></i> @Model.User.Phone</p>
+                                       
+                                    </div>
+                                </div>
+                                <div class="dot-overlay"></div>
+                            </div>
+                        </div>
+                        <!-- Responsive Navigation Trigger -->
+                        <a href="#" class="dashboard-responsive-nav-trigger"><i class="fa fa-reorder"></i> Dashboard Navigation</a>
+                        <div class="dashboard-nav">
+                            <div class="dashboard-nav-inner">
+                                <ul>
+                                    <li><a asp-action="profile" asp-controller="user"><i class="sl sl-icon-user"></i> Profile</a></li>
+                                    <li><a asp-action="logout" asp-controller="account" asp-area="admin"><i class="sl sl-icon-power"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard-content">
+                        <div class="dashboard-list-box">
+                            <div class="table-box">
+                                <table class="basic-table history-table">
+                                    <thead>
+                                        <tr>  
+                                            <th>Title</th>
+                                            <th>Execution Time</th>
+                                            <th>Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (BookedTour bookedTour in Model.BookedTours)
+                                        {
+                                            <tr>
+                                                <td>@bookedTour.Tour.Title</td>
+                                                <td>@bookedTour.Tour.StartDate.ToString("MM/dd/yyyy")- @bookedTour.Tour.EndDate.ToString("MM/dd/yyyy")</td>
+                                                <td>$@bookedTour.Tour.Price</td>
+                                            </tr>
+                                        }
+                                       
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content / End -->
+    </div>
+</div>
+<!-- Dashboard / End -->
+

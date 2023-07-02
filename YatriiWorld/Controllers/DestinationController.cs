@@ -63,7 +63,7 @@ namespace YatriiWorld.Controllers
             {
                 Email = stripeEmail,
                 Name = user.Name + " " + user.Surname,
-                Phone = "+994 50 66"
+                Phone = user.Phone,
             };
             var serviceCust = new CustomerService();
             Customer customer = serviceCust.Create(optionCust);

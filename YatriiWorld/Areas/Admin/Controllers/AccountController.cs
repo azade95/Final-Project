@@ -19,14 +19,16 @@ namespace YatriiWorld.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailService _emailService;
+        private readonly IWebHostEnvironment _env;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, RoleManager<IdentityRole> roleManager,IEmailService emailService)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, RoleManager<IdentityRole> roleManager,IEmailService emailService,IWebHostEnvironment env)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _roleManager = roleManager;
             _emailService = emailService;
+            _env = env;
         }
 
         public IActionResult Register()
@@ -43,13 +45,22 @@ namespace YatriiWorld.Areas.Admin.Controllers
                 ModelState.AddModelError("Email", "Email formati dogru deyil");
                 return View();
             }
-            //AppUser user = _mapper.Map<AppUser>(newuser);
-            AppUser user= new AppUser();
-            user.Email = newuser.Email;
-            user.Name = newuser.Name;
-            user.Surname = newuser.Surname;
-            user.UserName = newuser.Username;
-            user.Gender= newuser.Gender;
+            AppUser user = _mapper.Map<AppUser>(newuser);
+            if (newuser.Photo != null)
+            {
+                if (!newuser.Photo.CheckFileType("image/"))
+                {
+                    ModelState.AddModelError("Photo", "File type is not correct!");
+                    return View();
+                }
+                if (!newuser.Photo.CheckFileSize(2048))
+                {
+                    ModelState.AddModelError("Photo", "File size must be less than 2Mb!");
+                    return View();
+                }
+                user.Image = await newuser.Photo.CreateFileAsync(_env.WebRootPath, "assets/images/user/");
+            }
+
             IdentityResult result = await _userManager.CreateAsync(user, newuser.Password);
 
             if (!result.Succeeded)

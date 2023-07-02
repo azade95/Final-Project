@@ -20,6 +20,8 @@ namespace YatriiWorld.ViewModels
         [MinLength(3)]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        public string Phone { get; set; }   
+        public IFormFile Photo { get; set; }
         public string Gender { get; set; }
         [Required]
         [DataType(DataType.Password)]
