@@ -1,28 +1,18 @@
-﻿    <!-- banner starts -->
+﻿@model HomeVM
+    <!-- banner starts -->
 <div class="banner overflow-hidden">
     <div class="slider slider2">
         <div class="swiper-container">
             <div class="swiper-wrapper">
+                @foreach (Slide slide in Model.Slides)
+                {
                 <div class="swiper-slide">
                     <div class="slide-inner">
-                        <div class="slide-image" style="background-image:url(images/slider/1.jpg)"></div>
+                        <div class="slide-image" style="background-image:url('/assets/images/slider/@slide.Image')"></div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="slide-inner">
-                        <div class="slide-image" style="background-image:url(images/slider/2.jpg)"></div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="slide-inner">
-                        <div class="slide-image" style="background-image:url(images/slider/3.jpg)"></div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="slide-inner">
-                        <div class="slide-image" style="background-image:url(images/slider/4.jpg)"></div>
-                    </div>
-                </div>
+                }
+                
             </div>
             <!-- Add Arrows -->
             <div class="swiper-button-next"></div>
@@ -57,9 +47,9 @@
                     <div class="description" id="description">
                         <div class="single-full-title border-b mb-2 pb-2">
                             <div class="single-title">
-                                <h3 class="mb-1">Adriatic Adventure–Zagreb to Athens</h3>
+                                <h3 class="mb-1">@Model.Tour.Title</h3>
                                 <div class="rating-main d-sm-flex align-items-center">
-                                    <p class="mb-0 mr-2"><i class="flaticon-location-pin"></i> Greater London, United Kingdom</p>
+                                    <p class="mb-0 mr-2"><i class="flaticon-location-pin"></i> @Model.Tour.Destination</p>
                                     <div class="rating mr-2">
                                         <span class="fa fa-star checked"></span>
                                         <span class="fa fa-star checked"></span>
@@ -73,137 +63,29 @@
                         </div>
                         <div class="description-inner mb-2">
                             <h4>Highlight</h4>
-                            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
-                            <p class="mb-0">The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
+                            <p>@Model.Tour.Description</p>
                         </div>
 
                         <div class="tour-includes mb-2">
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td><i class="fa fa-clock-o pink mr-1" aria-hidden="true"></i> 5 Days</td>
-                                        <td><i class="fa fa-group pink mr-1" aria-hidden="true"></i> Max People : 26</td>
-                                        <td><i class="fa fa-calendar pink mr-1" aria-hidden="true"></i> Jan 18 - Dec 21</td>
+                                        <td><i class="fa fa-clock-o pink mr-1" aria-hidden="true"></i> @Model.Tour.Day Days</td>
+                                        <td><i class="fa fa-group pink mr-1" aria-hidden="true"></i> Max People : @Model.Tour.MaxPeople</td>
+                                        <td><i class="fa fa-calendar pink mr-1" aria-hidden="true"></i> @Model.Tour.StartDate.ToString("MMMM dd")-@Model.Tour.EndDate.ToString("MMMM dd")</td>
                                     </tr>
                                     <tr>
                                         <td><i class="fa fa-user pink mr-1" aria-hidden="true"></i> Min Age : 10+</td>
-                                        <td><i class="fa fa-map-signs pink mr-1" aria-hidden="true"></i> Pickup : Airport</td>
-                                        <td><i class="fa fa-file-alt pink mr-1" aria-hidden="true"></i> Langauge - English, Thai</td>
+                                     
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="description-inner mb-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 mb-2 pr-2">
-                                    <div class="desc-box">
-                                        <h5 class="mb-1">Departure & Return Location</h5>
-                                        <p class="mb-0">John F.K. International Airport(Google Map)</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 mb-2 pl-2">
-                                    <div class="desc-box">
-                                        <h5 class="mb-1">Bedroom</h5>
-                                        <p class="mb-0">4 Bedrooms</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 mb-2 pr-2">
-                                    <div class="desc-box">
-                                        <h5 class="mb-1">Departure Time</h5>
-                                        <p class="mb-0">3 Hours Before Flight Time</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 mb-2 pl-2">
-                                    <div class="desc-box">
-                                        <h5 class="mb-1">Departure Time</h5>
-                                        <p class="mb-0">3 Hours Before Flight Time</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 mb-2 pr-2">
-                                    <div class="desc-box">
-                                        <h5 class="mb-1">Price Includes</h5>
-                                        <ul>
-                                            <li><i class="fa fa-check pink mr-1"></i> Air Fares</li>
-                                            <li><i class="fa fa-check pink mr-1"></i> 3 Nights Hotel Accomodation</li>
-                                            <li><i class="fa fa-check pink mr-1"></i> Tour Guide</li>
-                                            <li><i class="fa fa-check pink mr-1"></i> Entrance Fees</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 mb-2 pl-2">
-                                    <div class="desc-box">
-                                        <h5 class="mb-1">Departure & Return Location</h5>
-                                        <ul>
-                                            <li><i class="fa fa-close pink mr-1"></i> Guide Service Fee</li>
-                                            <li><i class="fa fa-close pink mr-1"></i> Driver Service Fee</li>
-                                            <li><i class="fa fa-close pink mr-1"></i> Any Private Expenses</li>
-                                            <li><i class="fa fa-close pink mr-1"></i> Room Service Fees</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="description-inner mb-4">
-                            <h4>What to Expect</h4>
-                            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
-                            <p class="mb-0">The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
-                        </div>
+                       
                     </div>
 
-                    <div class="accrodion-grp faq-accrodion mb-4" id="iternary" data-grp-name="faq-accrodion">
-                        <h4>Iternary</h4>
-                        <div class="accrodion active">
-                            <div class="accrodion-title">
-                                <h5 class="mb-0"><span>Day 1</span> - Barcelona - Zaragoza - Madrid</h5>
-                            </div>
-                            <div class="accrodion-content" style="display: block;">
-                                <div class="inner">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, inventore cumque veniam, praesentium velit incidunt rem quas a, quos eos ipsum, reprehenderit voluptatem.</p>
-                                </div><!-- /.inner -->
-                            </div>
-                        </div>
-                        <div class="accrodion ">
-                            <div class="accrodion-title">
-                                <h5 class="mb-0"><span>Day 2</span> - Zurich - Biel/Bienne - Neuchatel - Geneva</h5>
-                            </div>
-                            <div class="accrodion-content" style="display: none;">
-                                <div class="inner">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, inventore cumque veniam, praesentium velit incidunt rem quas a, quos eos ipsum, reprehenderit voluptatem.</p>
-                                </div><!-- /.inner -->
-                            </div>
-                        </div>
-                        <div class="accrodion">
-                            <div class="accrodion-title">
-                                <h5 class="mb-0"><span>Day 3</span> - Enchanting Engelberg</h5>
-                            </div>
-                            <div class="accrodion-content" style="display: none;">
-                                <div class="inner">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, inventore cumque veniam, praesentium velit incidunt rem quas a, quos eos ipsum, reprehenderit voluptatem.</p>
-                                </div><!-- /.inner -->
-                            </div>
-                        </div>
-                        <div class="accrodion ">
-                            <div class="accrodion-title">
-                                <h5 class="mb-0"><span>Day 4</span> - Barcelona - Zaragoza - Madrid</h5>
-                            </div>
-                            <div class="accrodion-content" style="display: none;">
-                                <div class="inner">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, inventore cumque veniam, praesentium velit incidunt rem quas a, quos eos ipsum, reprehenderit voluptatem.</p>
-                                </div><!-- /.inner -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-map mb-4" id="single-map">
-                        <h4>Map</h4>
-                        <div class="map">
-                            <div style="width: 100%">
-                                <iframe height="400" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=+(mangal%20bazar)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                            </div>
-                        </div>
-                    </div>
+     
 
                     <div class="single-review mb-4" id="single-review">
                         <h4>Average Reviews</h4>
@@ -329,34 +211,7 @@
                         </div>
                     </div>
 
-                    <!-- blog review -->
-                    <div class="single-add-review" id="single-add-review">
-                        <h4>Write a Review</h4>
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea>Comment</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-btn">
-                                        <a href="#" class="nir-btn">Submit Review</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    
                 </div>
             </div>
 

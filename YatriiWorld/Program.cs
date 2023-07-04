@@ -36,6 +36,12 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 builder.Services.AddScoped<LayoutService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/access-denied";
+    options.LoginPath = "/admin/account/login";
+    options.LogoutPath = "/logout";
+});
 
 var app = builder.Build();
 app.UseAuthentication();

@@ -7,6 +7,7 @@ using YatriiWorld.DAL;
 using YatriiWorld.Models;
 using YatriiWorld.Utilities.Exceptions;
 using YatriiWorld.ViewModels;
+using YatriiWorld.ViewModels.Home;
 
 namespace YatriiWorld.Controllers
 {
@@ -25,9 +26,16 @@ namespace YatriiWorld.Controllers
             return View();
         }
 
-       public IActionResult Details()
+       public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null || id < 1) throw new WrongRequestException("id is not correct");
+            Tour tour = await _context.Tours.Include(t => t.Reviews).FirstOrDefaultAsync(t => t.Id == id);
+            HomeVM homeVM= new HomeVM
+            {
+                Tour = tour,
+                Slides= await _context.Slides.Take(4).ToListAsync(),
+            };
+            return View(homeVM);
         }
         [Authorize]
         public async Task<IActionResult> Booking(int? id)

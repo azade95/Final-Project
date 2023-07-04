@@ -50,6 +50,7 @@ namespace YatriiWorld.Controllers
             user.Gender = userVM.Gender;
             user.Phone = userVM.Phone;
             user.UserName= userVM.Username;
+            
             if (userVM.Photo != null)
             {
                 if (!userVM.Photo.CheckFileType("image/"))
@@ -61,6 +62,10 @@ namespace YatriiWorld.Controllers
                 {
                     ModelState.AddModelError("Photo", "File size must be less than 2Mb!");
                     return View();
+                }
+                if(user.Image!=null)
+                {
+                    user.Image.DeleteFile(_env.WebRootPath, "assets/images/user/");
                 }
                 user.Image = await userVM.Photo.CreateFileAsync(_env.WebRootPath, "assets/images/user/");
             }

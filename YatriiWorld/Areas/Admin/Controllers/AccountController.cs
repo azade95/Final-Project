@@ -174,7 +174,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
             string link = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token },HttpContext.Request.Scheme);
             _emailService.SendEmail(user.Email, "Reset password", link);
-            return Json(link);
+            return RedirectToAction("Index","Home");
         }
 
         public async Task<IActionResult> ResetPassword(string userId, string token)

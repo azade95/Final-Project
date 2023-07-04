@@ -14,7 +14,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AutoValidateAntiforgeryToken]
-  
+    [Authorize(Roles = $"Admin")]
     public class TourController : Controller
     {
         private readonly AppDbContext _context;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YatriiWorld.DAL;
@@ -11,6 +12,7 @@ namespace YatriiWorld.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AutoValidateAntiforgeryToken]
+    [Authorize(Roles = $"Admin")]
     public class SlideController : Controller
     {
         private readonly AppDbContext _context;

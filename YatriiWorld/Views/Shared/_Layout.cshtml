@@ -204,7 +204,7 @@
                         <div class="register-login">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a asp-action="index" asp-controller="home" asp-area="admin"><i class="icon-user mr-1"></i> @User.Identity.Name</a>
+                                <a asp-action="profile" asp-controller="user" ><i class="icon-user mr-1"></i> @User.Identity.Name</a>
                                 <a asp-action="logout" asp-controller="account" asp-area="admin"><i class="icon-logout mr-1"></i> Logout</a>
 
                             }
